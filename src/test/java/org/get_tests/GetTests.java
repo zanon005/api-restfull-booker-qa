@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
-import static io.restassured.matcher.RestAssuredMatchers.*;
 
 public class GetTests extends BaseTest {
 
@@ -64,15 +63,15 @@ public class GetTests extends BaseTest {
     @Test
     public void testReturningSpecificBookingV2(){
         JsonPath resp_json = HelperMethods.createNewBookingAndReturnBooking().jsonPath();
-        int id = resp_json.get("id");
+        int id = resp_json.get("bookingid");
         // Check Get specific booking created
         given()
-                .when()
+        .when()
                 .get("/booking/{id}", id)
-                .then()
+        .then()
                 .statusCode(HttpStatus.SC_OK)
-                .body("firstname", is(equalTo( resp_json.get("firstname"))))
-                .body("lastname", is(equalTo( resp_json.get("lastname"))))
+                .body("firstname", is(equalTo( resp_json.get("booking.firstname"))))
+                .body("lastname",  is(equalTo( resp_json.get("booking.lastname" ))))
         ;
     }
 }

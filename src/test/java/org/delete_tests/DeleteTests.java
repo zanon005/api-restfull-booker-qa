@@ -14,17 +14,17 @@ public class DeleteTests extends BaseTest {
         int test_booking_id = HelperMethods.createNewBookingAndReturnBookingID();
         given()
                 .header("Cookie", "token="+ HelperMethods.getAuthToken())
-                .when()
+        .when()
                 .delete("/booking/{test_booking_id}",test_booking_id)
-                .then()
+        .then()
                 .statusCode(HttpStatus.SC_CREATED)
         ;
 
         given()
                 .header("Cookie", "token="+ HelperMethods.getAuthToken())
-                .when()
+        .when()
                 .delete("/booking/{test_booking_id}",test_booking_id)
-                .then()
+        .then()
                 .statusCode(HttpStatus.SC_METHOD_NOT_ALLOWED)
         ;
     }
